@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
-const { VueLoaderPlugin } = require("vue-loader");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 // CSS extraction should only be enabled for production
 // so that we still get hot-reload during development.
@@ -66,6 +66,9 @@ module.exports = {
     hints: false
   },
   plugins: isProd
-    ? [new MiniCssExtractPlugin({ filename: "common.[chunkhash].css" })]
+    ? [
+        new VueLoaderPlugin(),
+        new MiniCssExtractPlugin({ filename: "common.[chunkhash].css" })
+      ]
     : [new VueLoaderPlugin(), new FriendlyErrorsPlugin()]
 };

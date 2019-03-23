@@ -33,7 +33,6 @@ export default {
 
   methods: {
     fetchItem() {
-      console.log("dispatching fetchitem");
       return this.$store.dispatch("fetchItem", this.$route.params.id);
     }
   }
